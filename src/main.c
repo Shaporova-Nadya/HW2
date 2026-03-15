@@ -30,7 +30,7 @@ int main(void)
                 if (temp == NULL) {
                     free(widths);
                     fclose(in);
-                    return;
+                    return 1;
                 }
                 widths = (int*)temp;
                 widths[currentCol] = 0;
@@ -70,7 +70,7 @@ int main(void)
                 cell[comma - ptr] = '\0';
                 ptr = comma + 1;
             } else {
-                int len = strlen(ptr);
+                int len = (int)strlen(ptr);
                 strncpy(cell, ptr, len);
                 cell[len] = '\0';
                 ptr += len;
