@@ -18,35 +18,46 @@ int main(void)
 
     while (fgets(line, sizeof(line), in)) {
         line[strcspn(line, "\n\r")] = 0;
-        int current_col = 0;
+        int currentCol = 0;
         char* ptr = line;
 
         while (1) {
             char* comma = strchr(ptr, ',');
             int len = comma ? (int)(comma - ptr) : (int)strlen(ptr);
 
-            if (current_col >= colCount) {
-                widths = realloc(widths, sizeof(int) * (current_col + 1));
-                widths[current_col] = 0;
-                colCount = current_col + 1;
+            if (currentCol >= colCount) {
+                void* temp = realloc(widths, sizeof(int) * currentCol);
+                if (temp == NULL) {
+                    free(widths);
+                    fclose(in);
+                    return -1;
+                }
+                widths = temp;
+                widths[currentCol] = 0;
+                colCount = currentCol + 1;
             }
 
-            if (len > widths[current_col])
-                widths[current_col] = len;
+            if (len > widths[currentCol])
+                widths[currentCol] = len;
 
             if (!comma)
                 break;
             ptr = comma + 1;
-            current_col++;
+            currentCol++;
         }
     }
 
     rewind(in);
     FILE* out = fopen("output.txt", "w");
+    if (out = NULL) {
+        free(widths);
+        fclose(in);
+        return -1;
+    }
     int rowIdx = 0;
 
     while (fgets(line, sizeof(line), in)) {
-        line[strcspn(line, "\n\r")] = 0;
+        line[strcspn(line, "\n\r")] = '\0';
 
         if (rowIdx == 0)
             printLine(out, widths, colCount, '=');
@@ -61,16 +72,17 @@ int main(void)
                 cell[comma - ptr] = '\0';
                 ptr = comma + 1;
             } else {
-                strcpy(cell, ptr);
-                ptr += strlen(ptr);
+                int len = strlen(ptr);
+                strncpy(cell, ptr, len);
+                cell[len] = '\0';
+                ptr += len;
             }
 
-            if (rowIdx == 0)
-                fprintf(out, " %-*s |", widths[i], cell);
-            else if (isNumeric(cell))
-                fprintf(out, " %*s |", widths[i], cell);
-            else
-                fprintf(out, " %-*s |", widths[i], cell);
+            if (rowIdx == 0 || !isNumeric(cell)) {
+                fprintf(out, "%-*s |", widths[i], cell);
+            } else {
+                fprintf(out, "%*s |", widths[i], cell);
+            }
         }
         fprintf(out, "\n");
 
