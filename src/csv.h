@@ -7,4 +7,4 @@
 int isNumeric(const char* s);
 
 // printLine draws pseudographics
-void printLine(FILE* out, int* widths, int cols, char fill);
+void printLine(FILE* out, const int* widths, int cols, char fill);
