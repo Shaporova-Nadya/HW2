@@ -15,7 +15,7 @@ jobs:
       - name: Configure
         run: |
           # -DCMAKE_EXPORT_COMPILE_COMMANDS=ON is important for clang-tidy
-          cmake -S src -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+          cmake -B build -S src -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
       - name: Build
         run: |
           cmake --build build
