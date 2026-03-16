@@ -30,7 +30,7 @@ int main(void)
                 if (temp == NULL) {
                     free(widths);
                     fclose(in);
-                    return -1;
+                    return 1;
                 }
                 widths = temp;
                 widths[currentCol] = 0;
