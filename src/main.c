@@ -49,7 +49,7 @@ int main(void)
 
     rewind(in);
     FILE* out = fopen("output.txt", "w");
-    if (out = NULL) {
+    if (out == NULL) {
         free(widths);
         fclose(in);
         return -1;
