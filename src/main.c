@@ -26,7 +26,7 @@ int main(void)
             int len = comma ? (int)(comma - ptr) : (int)strlen(ptr);
 
             if (currentCol >= colCount) {
-                void* temp = realloc(widths, sizeof(int) * currentCol);
+                void* temp = realloc(widths, sizeof(int) * currentCol + 1);
                 if (temp == NULL) {
                     free(widths);
                     fclose(in);
