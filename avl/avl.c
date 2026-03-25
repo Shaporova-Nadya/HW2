@@ -1,6 +1,6 @@
 #include "avl.h"
 #include <stdio.h>
-#include<stdlib.h>
+#include <stdlib.h>
 #include <string.h>
 
 int getHeight(Node* n)
@@ -53,14 +53,14 @@ Node* bigRotateLeft(Node* a)
 
 Node* find(Node* root, const char* iata)
 {
-    if(root == NULL){
+    if (root == NULL) {
         return NULL;
     }
     int res = strcmp(iata, root->iata);
-    if(res == 0){
+    if (res == 0) {
         return root;
     }
-    if (res < 0){
+    if (res < 0) {
         return find(root->left, iata);
     } else {
         return find(root->right, iata);
@@ -69,7 +69,7 @@ Node* find(Node* root, const char* iata)
 
 int getDifference(Node* n)
 {
-    if(n == NULL){
+    if (n == NULL) {
         return 0;
     }
     return getHeight(n->left) - getHeight(n->right);
@@ -77,22 +77,22 @@ int getDifference(Node* n)
 
 Node* balance(Node* p)
 {
-    if(p == NULL){
+    if (p == NULL) {
         return NULL;
     }
     updateHeight(p);
-    
+
     int dif = getDifference(p);
 
-    if(dif == 2){
-        if(p->left && getDifference(p->left) < 0){
+    if (dif == 2) {
+        if (p->left && getDifference(p->left) < 0) {
             return bigRotateRight(p);
-     }
+        }
         return rotateRight(p);
     }
 
-    if(dif == -2){
-        if(p->right && getDifference(p->right) > 0){
+    if (dif == -2) {
+        if (p->right && getDifference(p->right) > 0) {
             return bigRotateLeft(p);
         }
         return rotateLeft(p);
@@ -103,7 +103,7 @@ Node* balance(Node* p)
 
 Node* add(Node* root, const char* code, const char* name)
 {
-    if(root == NULL){
+    if (root == NULL) {
         Node* newNode = (Node*)malloc(sizeof(Node));
 
         strncpy(newNode->iata, code, 4);
@@ -112,15 +112,15 @@ Node* add(Node* root, const char* code, const char* name)
         newNode->name = strdup(name);
         newNode->left = newNode->right = NULL;
         newNode->height = 1;
-        
+
         return newNode;
     }
 
     int cmp = strcmp(code, root->iata);
 
-    if(cmp < 0){
+    if (cmp < 0) {
         root->left = add(root->left, code, name);
-    } else if(cmp > 0) {
+    } else if (cmp > 0) {
         root->right = add(root->right, code, name);
     } else {
         free(root->name);
@@ -135,7 +135,7 @@ Node* add(Node* root, const char* code, const char* name)
 int loadAirports(const char* filename, Node** root)
 {
     FILE* f = fopen(filename, "r");
-    if(!f){
+    if (!f) {
         printf("Не удалось открыть файл\n");
         return -1;
     }
@@ -143,10 +143,10 @@ int loadAirports(const char* filename, Node** root)
     char line[512];
     int count = 0;
 
-    while(fgets(line, sizeof(line), f)){
+    while (fgets(line, sizeof(line), f)) {
         line[strcspn(line, "\n\r")] = 0;
         char* colon = strchr(line, ':');
-        if(colon){
+        if (colon) {
             *colon = '\0';
             char* code = line;
             char* name = colon + 1;
@@ -161,7 +161,7 @@ int loadAirports(const char* filename, Node** root)
 
 void freeTree(Node* root)
 {
-    if(root == NULL){
+    if (root == NULL) {
         return;
     }
 
@@ -174,7 +174,7 @@ void freeTree(Node* root)
 
 void saveNode(Node* root, FILE* f)
 {
-    if(root == NULL){
+    if (root == NULL) {
         return;
     }
 
@@ -186,7 +186,7 @@ void saveNode(Node* root, FILE* f)
 void saveTree(Node* root, const char* filename)
 {
     FILE* f = fopen(filename, "w");
-    if(!f){
+    if (!f) {
         printf("Ошибка открытия файла");
         return;
     }
@@ -201,14 +201,14 @@ Node* findMin(Node* p)
 
 Node* deleteNode(Node* root, const char* code)
 {
-    if(root == NULL){
+    if (root == NULL) {
         return NULL;
     }
 
     int cmp = strcmp(code, root->iata);
-    if(cmp < 0){
+    if (cmp < 0) {
         root->left = deleteNode(root->left, code);
-    } else if(cmp > 0) {
+    } else if (cmp > 0) {
         root->right = deleteNode(root->right, code);
     } else {
 
@@ -217,7 +217,7 @@ Node* deleteNode(Node* root, const char* code)
         free(root->name);
         free(root);
 
-        if(!r){
+        if (!r) {
             return l;
         }
 
@@ -232,8 +232,9 @@ Node* deleteNode(Node* root, const char* code)
     return balance(root);
 }
 
-int countNodes(Node* root) 
+int countNodes(Node* root)
 {
-    if (root == NULL) return 0;
+    if (root == NULL)
+        return 0;
     return 1 + countNodes(root->left) + countNodes(root->right);
 }
