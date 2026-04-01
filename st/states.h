@@ -1,8 +1,8 @@
 #pragma once
 
 typedef struct Edge {
-    int num; //Номер города, куда ведет дорога
-    int len; //длина пути
+    int num;           //Номер города, куда ведет дорога
+    int len;           //длина пути
     struct Edge* next; //указатель на следующее ребро этого города
 } Edge;
 
@@ -11,14 +11,14 @@ typedef struct City {
 } City;
 
 typedef struct HeapNode {
-    int dist; //Расстояние
+    int dist;    //Расстояние
     int cityNum; //Номер города
 } HeapNode;
 
 typedef struct MinHeap {
     HeapNode* data; //Массив, где лежат элементы кучи
-    int size; //Текущее количество элементов
-    int capacity; //Максимальный размер
+    int size;       //Текущее количество элементов
+    int capacity;   //Максимальный размер
 } MinHeap;
 
 //Добавляет новое ребро в список смежности
