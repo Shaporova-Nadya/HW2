@@ -21,12 +21,17 @@ typedef struct MinHeap {
     int capacity; //Максимальный размер
 } MinHeap;
 
-void addEdge(City* graph, int u, int v, int len); //Добавляет новое ребро в список смежности
+//Добавляет новое ребро в список смежности
+void addEdge(City* graph, int u, int v, int len);
 
-void freeGraph(City* graph, int n); //Освобождает память, выделенную под граф
+//Освобождает память, выделенную под граф
+void freeGraph(City* graph, int n);
 
-MinHeap* initHeap(int maxSize); //Инициализация бинарной кучи
+//Инициализация бинарной кучи
+MinHeap* initHeap(int maxSize);
 
-void push(MinHeap* h, int dist, int cityNum); //Добавляет новый элемент в кучу
+//Добавляет новый элемент в кучу
+void push(MinHeap* h, int dist, int cityNum);
 
-HeapNode popMin(MinHeap* h); //Извлекает элемент с минимальным расстоянием из кучи
+//Извлекает элемент с минимальным расстоянием из кучи
+HeapNode popMin(MinHeap* h);
