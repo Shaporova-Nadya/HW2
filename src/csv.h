@@ -28,7 +28,7 @@ static char** readLines(const char* filename, int* outRowCount);
 // determines the max number of cols
 static int getMaxCols(char** lines, int rowCount);
 
-//f ills the table from an array of rows
+// fills the table from an array of rows
 static void fillTable(Table* t, char** lines, int rowCount, int maxCols);
 
 // calculates widths
