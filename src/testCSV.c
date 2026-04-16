@@ -47,7 +47,6 @@ static bool checkOutput(Table* t, const char* expected)
     char line[512];
     while (fgets(line, sizeof(line), in)) {
         strncat(buf, line, sizeof(buf) - strlen(buf) - 1);
-
     }
     fclose(in);
     remove(outName);
