@@ -7,6 +7,13 @@
 
 #define MAX_LINE 8192
 
+typedef struct Table {
+    char*** data;
+    int rows;
+    int cols;
+    int* widths;
+} Table;
+
 int isNumeric(const char* s)
 {
     if (!s || !*s) {
@@ -81,7 +88,7 @@ static char** readLines(const char* filename, int* outRowCount)
         return NULL;
     }
 
-    char** lines = malloc(sizeof(char*));
+    char** lines = NULL;
     int count = 0;
     char buf[MAX_LINE];
 
