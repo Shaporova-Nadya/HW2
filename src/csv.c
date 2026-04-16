@@ -154,7 +154,9 @@ static void fillTable(Table* t, char** lines, int rowCount, int maxCols)
         t->data[i] = malloc(maxCols * sizeof(char*));
         if (!t->data[i]) {
             for (int k = 0; k < i; k++) {
-                for (int j = 0; j < maxCols; j++) free(t->data[k][j]);
+                for (int j = 0; j < maxCols; j++) {
+                    free(t->data[k][j]);
+                }
                 free(t->data[k]);
             }
             free(t->data);
