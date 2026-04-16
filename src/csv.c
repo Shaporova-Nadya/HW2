@@ -96,8 +96,8 @@ static char** readLines(const char* filename, int* outRowCount)
             fclose(in);
             return NULL;
         }
-        lines = realloc(lines, (count + 1) * sizeof(char*));
-        if (!lines) {
+        char** tmp = realloc(lines, (count + 1) * sizeof(char*));
+        if (!tmp) {
             free(line);
             for (int i = 0; i < count; i++) {
                 free(lines[i]);
