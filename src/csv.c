@@ -106,6 +106,7 @@ static char** readLines(const char* filename, int* outRowCount)
             fclose(in);
             return NULL;
         }
+        lines = tmp;
         lines[count++] = line;
     }
     fclose(in);
