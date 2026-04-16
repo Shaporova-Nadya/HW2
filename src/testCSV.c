@@ -6,6 +6,13 @@
 #include <string.h>
 #include <unistd.h>
 
+struct Table {
+    char*** data;
+    int rows;
+    int cols;
+    int* widths;
+};
+
 static bool checkTable(Table* t, int expectedRows, int expectedCols, const char* expectedData[][10])
 {
     if (t->rows != expectedRows || t->cols != expectedCols) {
