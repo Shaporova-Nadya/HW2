@@ -140,7 +140,7 @@ static void fillTable(Table* t, char** lines, int rowCount, int maxCols)
     t->rows = rowCount;
     t->cols = maxCols;
 
-    if (rowCount == 0) {
+    if (rowCount == 0 || maxCols == 0) {
         t->data = NULL;
         return;
     }
@@ -182,7 +182,7 @@ static void fillTable(Table* t, char** lines, int rowCount, int maxCols)
 
 void computeWidths(Table* t)
 {
-    if (!t || t->rows == 0) {
+    if (!t || t->rows == 0 || t->cols == 0) {
         return;
     }
     free(t->widths);
