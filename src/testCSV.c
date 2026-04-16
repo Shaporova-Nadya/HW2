@@ -46,7 +46,8 @@ static bool checkOutput(Table* t, const char* expected)
     char buf[4096] = "";
     char line[512];
     while (fgets(line, sizeof(line), in)) {
-        strcat(buf, line);
+        strncat(buf, line, sizeof(buf) - strlen(buf) - 1);
+
     }
     fclose(in);
     remove(outName);
@@ -160,8 +161,8 @@ bool testIncorrect(void)
     computeWidths(t2);
     deleteTable(t2);
 
-    const char* CSV = "A,BB\n\"3456, banana\",twix";
-    char* file = makeTempCSV(CSV);
+    const char* csv = "A,BB\n\"3456, banana\",twix";
+    char* file = makeTempCSV(csv);
     if (!file) {
         return false;
     }
