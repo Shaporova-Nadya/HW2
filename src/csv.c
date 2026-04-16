@@ -162,7 +162,9 @@ static void fillTable(Table* t, char** lines, int rowCount, int maxCols)
             t->rows = 0;
             return;
         }
-        for (int j = 0; j < maxCols; j++) t->data[i][j] = NULL;
+        for (int j = 0; j < maxCols; j++) {
+            t->data[i][j] = NULL;
+        }
 
         const char* ptr = lines[i];
         int col = 0;
@@ -172,7 +174,9 @@ static void fillTable(Table* t, char** lines, int rowCount, int maxCols)
             char* field = malloc(len + 1);
             if (!field) {
                 for (int k = 0; k <= i; k++) {
-                    for (int j = 0; j < maxCols; j++) free(t->data[k][j]);
+                    for (int j = 0; j < maxCols; j++) {
+                        free(t->data[k][j]);
+                    }
                     free(t->data[k]);
                 }
                 free(t->data);
@@ -183,7 +187,9 @@ static void fillTable(Table* t, char** lines, int rowCount, int maxCols)
             strncpy(field, ptr, len);
             field[len] = '\0';
             t->data[i][col++] = field;
-            if (!comma) break;
+            if (!comma) {
+                break;
+            }
             ptr = comma + 1;
         }
 
