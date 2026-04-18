@@ -117,7 +117,10 @@ static char** readLines(const char* filename, int* outRowCount)
         lines[count++] = line;
 
         if (strlen(buf) == MAX_LINE - 1 && buf[MAX_LINE - 2] != '\n') {
-            for (int ch = fgetc(in); ch != '\n' && ch != EOF; ch = fgetc(in));
+            int ch = fgetc(in);
+            while (ch != '\n' && ch != EOF) {
+                ch = fgetc(in);
+            }
         }
     }
     fclose(in);
