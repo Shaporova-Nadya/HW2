@@ -8,3 +8,4 @@ target_link_libraries(main PRIVATE csv)
 
 add_executable(testC testCSV.c)
 target_link_libraries(testC PRIVATE csv)
+target_link_libraries(main PRIVATE csv)

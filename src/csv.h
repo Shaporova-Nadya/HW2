@@ -25,3 +25,4 @@ int readCSV(Table* t, const char* filename);
 
 // prints the table
 void printTable(const Table* t, FILE* out);
+void printLine(FILE* out, const int* widths, int cols, char fill);

@@ -276,3 +276,4 @@ void printTable(const Table* t, FILE* out)
         printLine(out, t->widths, t->cols, i == 0 ? '=' : '-');
     }
 }
+}
